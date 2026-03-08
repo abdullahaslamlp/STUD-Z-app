@@ -1,9 +1,8 @@
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
-interface GlassCardProps {
+interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
-  className?: string;
   glow?: "blue" | "purple" | "none";
 }
 
