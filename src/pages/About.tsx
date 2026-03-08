@@ -1,12 +1,15 @@
 import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
 import { Users, Code, TrendingUp, DollarSign, Palette, Terminal, Heart } from "lucide-react";
+import abdullahImg from "@/assets/abdullah.jpeg";
+import hasnatImg from "@/assets/hasnat.jpeg";
+import basilImg from "@/assets/basil.jpeg";
 
 const founders = [
-  { role: "CEO & Founder", title: "The Visionary", icon: TrendingUp, color: "blue" as const },
-  { role: "CTO", title: "Technical Lead", icon: Code, color: "purple" as const },
-  { role: "COO", title: "Operations", icon: Users, color: "blue" as const },
-  { role: "CFO", title: "Marketing & Finance", icon: DollarSign, color: "purple" as const },
+  { name: "Abdullah Aslam", role: "CEO & Founder", title: "The Visionary", icon: TrendingUp, color: "blue" as const, image: abdullahImg },
+  { name: "Hasnat Ahmed", role: "CTO", title: "Technical Lead", icon: Code, color: "purple" as const, image: hasnatImg },
+  { name: "Basil Saleem", role: "COO", title: "Operations", icon: Users, color: "blue" as const, image: basilImg },
+  { name: "Aima Aftab", role: "CFO", title: "Marketing & Finance", icon: DollarSign, color: "purple" as const, image: null },
 ];
 
 const openRoles = [
@@ -32,12 +35,17 @@ export default function About() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-24">
           {founders.map((f) => (
             <GlassCard key={f.role} glow={f.color} className="text-center space-y-4">
-              <div className="w-20 h-20 mx-auto rounded-full bg-gradient-neon flex items-center justify-center">
-                <f.icon size={32} className="text-primary-foreground" />
+              <div className="w-20 h-20 mx-auto rounded-full overflow-hidden bg-gradient-neon flex items-center justify-center">
+                {f.image ? (
+                  <img src={f.image} alt={f.name} className="w-full h-full object-cover" />
+                ) : (
+                  <f.icon size={32} className="text-primary-foreground" />
+                )}
               </div>
               <div>
-                <h3 className="font-display font-semibold text-lg">{f.role}</h3>
-                <p className="text-sm text-muted-foreground">{f.title}</p>
+                <h3 className="font-display font-semibold text-lg">{f.name}</h3>
+                <p className="text-sm text-primary">{f.role}</p>
+                <p className="text-xs text-muted-foreground">{f.title}</p>
               </div>
             </GlassCard>
           ))}
