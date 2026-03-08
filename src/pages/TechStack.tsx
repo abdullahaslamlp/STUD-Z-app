@@ -1,33 +1,33 @@
 import GlassCard from "@/components/GlassCard";
-import { Globe, Server, Database, Cpu } from "lucide-react";
+import { Globe, Paintbrush, Code, Component } from "lucide-react";
 
 const stack = [
   {
-    category: "Frontend",
-    tech: "Next.js",
-    desc: "React-based framework for blazing-fast, SEO-friendly pages with server-side rendering.",
+    category: "UI Framework",
+    tech: "React + Vite",
+    desc: "Blazing-fast development with React 18 and Vite's instant HMR. Build at the speed of thought ⚡.",
     icon: Globe,
     glow: "blue" as const,
   },
   {
-    category: "Hosting",
-    tech: "Vercel",
-    desc: "Edge-deployed globally for instant load times. Your notes load before you can blink.",
-    icon: Server,
+    category: "Styling",
+    tech: "Tailwind CSS",
+    desc: "Utility-first CSS for rapid, consistent styling. Glassmorphism, neon gradients — all pixel-perfect.",
+    icon: Paintbrush,
     glow: "purple" as const,
   },
   {
-    category: "AI Processing",
-    tech: "Python / FastAPI",
-    desc: "Lightning-fast AI pipeline for transcription, summarization, and smart flashcard generation.",
-    icon: Cpu,
+    category: "Language",
+    tech: "TypeScript",
+    desc: "Type-safe code that catches bugs before they happen. Enterprise-grade reliability from day one.",
+    icon: Code,
     glow: "blue" as const,
   },
   {
-    category: "Database",
-    tech: "PostgreSQL",
-    desc: "Rock-solid, secure storage for all your notes, flashcards, and study data. Enterprise-grade reliability.",
-    icon: Database,
+    category: "Components",
+    tech: "shadcn/ui",
+    desc: "Beautiful, accessible UI components built on Radix primitives. Customizable to match our neon aesthetic.",
+    icon: Component,
     glow: "purple" as const,
   },
 ];
