@@ -7,7 +7,7 @@ interface GlassCardProps {
   glow?: "blue" | "purple" | "none";
 }
 
-export default function GlassCard({ children, className, glow = "none" }: GlassCardProps) {
+export default function GlassCard({ children, className, glow = "none", ...props }: GlassCardProps) {
   return (
     <div
       className={cn(
@@ -16,6 +16,7 @@ export default function GlassCard({ children, className, glow = "none" }: GlassC
         glow === "purple" && "shadow-neon-purple hover:shadow-neon-purple",
         className
       )}
+      {...props}
     >
       {children}
     </div>
