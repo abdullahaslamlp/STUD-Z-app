@@ -9,42 +9,42 @@ const oldWay = [
   "Typing notes while missing half the lecture",
   "Manually making flashcards at 1 AM",
   "Ctrl+F-ing through 200 slides before finals",
-  "Stress. Burnout. Repeat. 😩",
+  "Stress. Burnout. Repeat.",
 ];
 
 const studZWay = [
   "Instant AI transcription — just hit record",
   "Auto-generated flashcards in one click",
   "Chat with your notes like they're a tutor",
-  "2:00 AM cram-session savior ⚡",
+  "Your 2 AM cram-session savior",
 ];
 
 export default function Index() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImg} alt="Students studying" className="w-full h-full object-cover opacity-20" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background" />
+          <img src={heroImg} alt="Students studying together" className="w-full h-full object-cover opacity-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10 pt-24">
           <div className="max-w-3xl mx-auto text-center space-y-6 animate-slide-up">
-            <img src={logo} alt="Stud-Z" className="h-24 w-24 mx-auto animate-float rounded-2xl" />
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold leading-tight">
+            <img src={logo} alt="Stud-Z" className="h-20 w-20 mx-auto rounded-xl pixel-border" />
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold leading-tight text-foreground">
               Study Smarter,{" "}
-              <span className="text-gradient-neon">Not Harder</span> 🧠
+              <span className="text-primary">Not Harder</span>
             </h1>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              The AI-powered companion that turns your lecture chaos into organized genius. Built by Gen Z, for Gen Z.
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              The AI-powered companion that turns your lecture chaos into organized genius. Built by students, for students.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button variant="neon" size="lg" className="text-base">
-                Get Started Free 🚀
+              <Button variant="blocky" size="lg" className="text-base">
+                Get Started Free →
               </Button>
               <Link to="/services">
-                <Button variant="neon-outline" size="lg" className="text-base w-full sm:w-auto">
+                <Button variant="blocky-outline" size="lg" className="text-base w-full sm:w-auto">
                   Explore Features
                 </Button>
               </Link>
@@ -54,19 +54,19 @@ export default function Index() {
       </section>
 
       {/* Problem / Solution */}
-      <section className="py-24">
+      <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-4">
-            Why <span className="text-gradient-neon">Stud-Z</span>? 🤔
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-4 text-foreground">
+            Why <span className="text-primary">Stud-Z</span>?
           </h2>
           <p className="text-center text-muted-foreground mb-16 max-w-xl mx-auto">
-            We get it. Traditional studying is broken. Here's how we fix it.
+            Traditional studying is broken. Here's how we fix it.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <GlassCard className="space-y-4 border-destructive/30">
+            <GlassCard blocky className="space-y-4 border-destructive/40">
               <h3 className="font-display text-xl font-semibold text-destructive flex items-center gap-2">
-                <X size={20} /> The Old Way 😤
+                <X size={20} /> The Old Way
               </h3>
               <ul className="space-y-3">
                 {oldWay.map((item, i) => (
@@ -78,14 +78,14 @@ export default function Index() {
               </ul>
             </GlassCard>
 
-            <GlassCard glow="blue" className="space-y-4">
+            <GlassCard blocky glow="blue" className="space-y-4 border-primary/40">
               <h3 className="font-display text-xl font-semibold text-primary flex items-center gap-2">
-                <Zap size={20} /> The Stud-Z Way ⚡
+                <Zap size={20} /> The Stud-Z Way
               </h3>
               <ul className="space-y-3">
                 {studZWay.map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm">
-                    <Check size={16} className="text-primary mt-0.5 shrink-0" />
+                    <Check size={16} className="text-secondary mt-0.5 shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -95,24 +95,24 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Quick Features */}
-      <section className="py-24 bg-card/20">
+      {/* Core Features */}
+      <section className="py-24">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-16">
-            Core <span className="text-gradient-neon">Superpowers</span> 💪
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-16 text-foreground">
+            Core <span className="text-secondary">Superpowers</span>
           </h2>
 
           <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
-              { icon: Zap, title: "LiveSync Audio", desc: "Record & get instant simplified transcripts", color: "blue" as const },
-              { icon: BookOpen, title: "Flashcard Forge", desc: "One-click notes to active recall sets", color: "purple" as const },
-              { icon: Brain, title: "Brain-Dump Chat", desc: "AI tutor trained on your class notes", color: "blue" as const },
+              { icon: Zap, title: "LiveSync Audio", desc: "Record & get instant simplified transcripts", color: "bg-primary" },
+              { icon: BookOpen, title: "Flashcard Forge", desc: "One-click notes to active recall sets", color: "bg-secondary" },
+              { icon: Brain, title: "Brain-Dump Chat", desc: "AI tutor trained on your class notes", color: "bg-accent" },
             ].map((f) => (
-              <GlassCard key={f.title} glow={f.color} className="text-center space-y-3">
-                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-neon flex items-center justify-center">
+              <GlassCard key={f.title} blocky className="text-center space-y-3">
+                <div className={`w-12 h-12 mx-auto rounded-none ${f.color} flex items-center justify-center pixel-border-sm`}>
                   <f.icon size={24} className="text-primary-foreground" />
                 </div>
-                <h3 className="font-display font-semibold text-lg">{f.title}</h3>
+                <h3 className="font-display font-semibold text-lg text-foreground">{f.title}</h3>
                 <p className="text-sm text-muted-foreground">{f.desc}</p>
               </GlassCard>
             ))}
@@ -120,7 +120,7 @@ export default function Index() {
 
           <div className="text-center mt-12">
             <Link to="/services">
-              <Button variant="neon-outline" size="lg">See All Features →</Button>
+              <Button variant="blocky-outline" size="lg">See All Features →</Button>
             </Link>
           </div>
         </div>

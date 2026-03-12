@@ -15,7 +15,8 @@ export default {
     extend: {
       fontFamily: {
         display: ["'Space Grotesk'", "sans-serif"],
-        body: ["'Inter'", "sans-serif"],
+        body: ["'DM Sans'", "sans-serif"],
+        pixel: ["'Press Start 2P'", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,10 +52,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "neon-blue": "hsl(var(--neon-blue))",
-        "neon-purple": "hsl(var(--neon-purple))",
-        "neon-cyan": "hsl(var(--neon-cyan))",
-        "glass-border": "hsl(var(--glass-border))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
