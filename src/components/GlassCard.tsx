@@ -11,10 +11,10 @@ export default function GlassCard({ children, className, glow = "none", blocky =
   return (
     <div
       className={cn(
-        "bg-card border-2 border-border p-6 transition-all duration-200",
-        blocky ? "rounded-none pixel-border" : "rounded-xl card-elevated",
-        glow === "blue" && "border-primary/30",
-        glow === "purple" && "border-secondary/30",
+        "bg-card border-2 border-border p-6 transition-all duration-300 hover:-translate-y-1",
+        blocky ? "rounded-none pixel-border hover:shadow-[6px_6px_0px_hsl(var(--foreground))]" : "rounded-xl card-elevated",
+        glow === "blue" && "border-primary/30 hover:border-primary/60",
+        glow === "purple" && "border-secondary/30 hover:border-secondary/60",
         className
       )}
       {...props}

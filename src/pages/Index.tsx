@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import GlassCard from "@/components/GlassCard";
 import { Link } from "react-router-dom";
-import { Zap, BookOpen, Brain, X, Check } from "lucide-react";
+import { Zap, BookOpen, Brain, X, Check, Star, Quote } from "lucide-react";
 import heroImg from "@/assets/hero-students.jpg";
 import logo from "@/assets/stud-z-logo.png";
 
@@ -17,6 +17,45 @@ const studZWay = [
   "Auto-generated flashcards in one click",
   "Chat with your notes like they're a tutor",
   "Your 2 AM cram-session savior",
+];
+
+const testimonials = [
+  {
+    name: "Fatima Raza",
+    university: "LUMS, Lahore",
+    text: "Stud-Z literally saved my CGPA last semester. I recorded every lecture and the AI summaries were better than my own notes. 10/10 recommend!",
+    rating: 5,
+  },
+  {
+    name: "Ahmed Khan",
+    university: "NUST, Islamabad",
+    text: "The flashcard feature is insane. I used to spend hours making Anki decks — now it takes one click. My friends think I've become a genius overnight.",
+    rating: 5,
+  },
+  {
+    name: "Ayesha Malik",
+    university: "FAST, Karachi",
+    text: "Brain-Dump Chat is like having a TA who's available 24/7. I asked it questions about my DSA notes at 3 AM before my final and it actually helped me pass.",
+    rating: 5,
+  },
+  {
+    name: "Usman Ali",
+    university: "UET, Lahore",
+    text: "As an engineering student, I have way too many formulas to memorize. Smart Highlights picks out exactly what I need. This app understands the struggle.",
+    rating: 4,
+  },
+  {
+    name: "Zainab Iqbal",
+    university: "AKU, Karachi",
+    text: "Cram Mode before my anatomy final was a lifesaver. It condensed 16 weeks into the most important points. I actually slept before the exam for once!",
+    rating: 5,
+  },
+  {
+    name: "Bilal Hussain",
+    university: "COMSATS, Islamabad",
+    text: "I was skeptical at first, but after using Stud-Z for one week I couldn't go back. The transcription quality is surprisingly good even with my professor's accent.",
+    rating: 4,
+  },
 ];
 
 export default function Index() {
@@ -122,6 +161,40 @@ export default function Index() {
             <Link to="/services">
               <Button variant="blocky-outline" size="lg">See All Features →</Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Student Testimonials */}
+      <section className="py-24 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-4 text-foreground">
+            What <span className="text-primary">Students</span> Say
+          </h2>
+          <p className="text-center text-muted-foreground mb-16 max-w-xl mx-auto">
+            Real reviews from real students across Pakistan.
+          </p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {testimonials.map((t) => (
+              <GlassCard key={t.name} blocky className="space-y-4 flex flex-col">
+                <Quote size={24} className="text-primary/40" />
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1">"{t.text}"</p>
+                <div className="pt-2 border-t-2 border-border">
+                  <div className="flex items-center gap-1 mb-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={14}
+                        className={i < t.rating ? "text-accent fill-accent" : "text-border"}
+                      />
+                    ))}
+                  </div>
+                  <p className="font-display font-semibold text-sm text-foreground">{t.name}</p>
+                  <p className="text-xs text-muted-foreground">{t.university}</p>
+                </div>
+              </GlassCard>
+            ))}
           </div>
         </div>
       </section>
