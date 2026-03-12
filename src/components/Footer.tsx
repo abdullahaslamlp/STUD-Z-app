@@ -3,15 +3,15 @@ import logo from "@/assets/stud-z-logo.png";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-card/30 backdrop-blur-lg">
+    <footer className="border-t-2 border-border bg-muted/50">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <img src={logo} alt="Stud-Z" className="h-8 w-8 rounded-lg" />
-              <span className="font-display text-lg font-bold text-gradient-neon">Stud-Z</span>
+              <img src={logo} alt="Stud-Z" className="h-8 w-8 rounded-sm pixel-border-sm" />
+              <span className="font-display text-lg font-bold text-primary">Stud-Z</span>
             </div>
-            <p className="text-sm text-muted-foreground">Study Smarter, Not Harder ⚡</p>
+            <p className="text-sm text-muted-foreground">Study Smarter, Not Harder.</p>
           </div>
 
           <div>
@@ -42,8 +42,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-border text-center text-sm text-muted-foreground">
-          © 2026 Stud-Z. All rights reserved. Built with 💜 by Gen Z.
+        <div className="mt-10 pt-6 border-t-2 border-border text-center text-sm text-muted-foreground">
+          © 2026 Stud-Z. All rights reserved.
         </div>
       </div>
     </footer>

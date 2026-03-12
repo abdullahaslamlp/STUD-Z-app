@@ -17,11 +17,11 @@ export default function Navbar() {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-strong">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b-2 border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Stud-Z Logo" className="h-10 w-10 rounded-lg" />
-          <span className="font-display text-xl font-bold text-gradient-neon">Stud-Z</span>
+          <img src={logo} alt="Stud-Z Logo" className="h-10 w-10 rounded-lg pixel-border-sm" />
+          <span className="font-display text-xl font-bold text-primary">Stud-Z</span>
         </Link>
 
         {/* Desktop */}
@@ -30,15 +30,15 @@ export default function Navbar() {
             <Link
               key={l.path}
               to={l.path}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-sm font-semibold transition-colors hover:text-primary ${
                 location.pathname === l.path ? "text-primary" : "text-muted-foreground"
               }`}
             >
               {l.label}
             </Link>
           ))}
-          <Button variant="neon" size="sm">
-            Get Started 🚀
+          <Button variant="blocky" size="sm">
+            Get Started →
           </Button>
         </div>
 
@@ -50,21 +50,21 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden glass-strong border-t border-border px-4 pb-4 animate-slide-up">
+        <div className="md:hidden bg-background border-t-2 border-border px-4 pb-4 animate-slide-up">
           {navLinks.map((l) => (
             <Link
               key={l.path}
               to={l.path}
               onClick={() => setOpen(false)}
-              className={`block py-3 text-sm font-medium transition-colors hover:text-primary ${
+              className={`block py-3 text-sm font-semibold transition-colors hover:text-primary ${
                 location.pathname === l.path ? "text-primary" : "text-muted-foreground"
               }`}
             >
               {l.label}
             </Link>
           ))}
-          <Button variant="neon" size="sm" className="w-full mt-2">
-            Get Started 🚀
+          <Button variant="blocky" size="sm" className="w-full mt-2">
+            Get Started →
           </Button>
         </div>
       )}

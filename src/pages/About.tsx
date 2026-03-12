@@ -20,31 +20,31 @@ const openRoles = [
 
 export default function About() {
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-24 pb-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-slide-up">
-          <h1 className="text-4xl sm:text-5xl font-display font-bold mb-4">
-            Meet the <span className="text-gradient-neon">Team</span> 👋
+          <h1 className="text-4xl sm:text-5xl font-display font-bold mb-4 text-foreground">
+            Meet the <span className="text-primary">Team</span>
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            We're Gen Z students who got tired of studying the hard way. So we built something better.
+            We're students who got tired of studying the hard way. So we built something better.
           </p>
         </div>
 
         {/* Founders */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-24">
           {founders.map((f) => (
-            <GlassCard key={f.role} glow={f.color} className="text-center space-y-4">
-              <div className="w-20 h-20 mx-auto rounded-full overflow-hidden bg-gradient-neon flex items-center justify-center">
+            <GlassCard key={f.role} blocky className="text-center space-y-4">
+              <div className="w-20 h-20 mx-auto overflow-hidden bg-muted flex items-center justify-center pixel-border-sm rounded-none">
                 {f.image ? (
                   <img src={f.image} alt={f.name} className="w-full h-full object-cover" />
                 ) : (
-                  <f.icon size={32} className="text-primary-foreground" />
+                  <f.icon size={32} className="text-muted-foreground" />
                 )}
               </div>
               <div>
-                <h3 className="font-display font-semibold text-lg">{f.name}</h3>
-                <p className="text-sm text-primary">{f.role}</p>
+                <h3 className="font-display font-semibold text-lg text-foreground">{f.name}</h3>
+                <p className="text-sm text-primary font-medium">{f.role}</p>
                 <p className="text-xs text-muted-foreground">{f.title}</p>
               </div>
             </GlassCard>
@@ -53,8 +53,8 @@ export default function About() {
 
         {/* Join the fam */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-display font-bold mb-4">
-            Join the <span className="text-gradient-neon">Fam</span> 🫶
+          <h2 className="text-3xl sm:text-4xl font-display font-bold mb-4 text-foreground">
+            Join the <span className="text-secondary">Team</span>
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
             We're always looking for passionate people to join our mission. Check out these open roles:
@@ -63,10 +63,10 @@ export default function About() {
 
         <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
           {openRoles.map((r) => (
-            <GlassCard key={r.title} glow="blue" className="text-center space-y-3">
-              <r.icon size={28} className="mx-auto text-primary" />
-              <h3 className="font-display font-semibold">{r.title}</h3>
-              <Button variant="neon-outline" size="sm">Apply →</Button>
+            <GlassCard key={r.title} blocky className="text-center space-y-3">
+              <r.icon size={28} className="mx-auto text-secondary" />
+              <h3 className="font-display font-semibold text-foreground">{r.title}</h3>
+              <Button variant="blocky-outline" size="sm">Apply →</Button>
             </GlassCard>
           ))}
         </div>
