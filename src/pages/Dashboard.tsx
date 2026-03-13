@@ -1,12 +1,20 @@
 import { useAuth } from "@/contexts/AuthContext";
+import { useTasks } from "@/hooks/use-tasks";
+import { useStudyNotes } from "@/hooks/use-study-notes";
 import { Button } from "@/components/ui/button";
 import GlassCard from "@/components/GlassCard";
+import ProfileCard from "@/components/dashboard/ProfileCard";
+import TasksPanel from "@/components/dashboard/TasksPanel";
+import NotesPanel from "@/components/dashboard/NotesPanel";
 import { BookOpen, Brain, Zap, LogOut } from "lucide-react";
 
 export default function Dashboard() {
   const { user, signOut } = useAuth();
+  const { tasks } = useTasks();
+  const { notes } = useStudyNotes();
 
   const displayName = user?.user_metadata?.full_name || user?.email?.split("@")[0] || "Student";
+  const pendingTasks = tasks.filter((t) => t.status !== "done").length;
 
   return (
     <div className="min-h-screen bg-background pt-20 px-4">
@@ -27,9 +35,9 @@ export default function Dashboard() {
         {/* Quick Stats */}
         <div className="grid sm:grid-cols-3 gap-4">
           {[
-            { icon: BookOpen, label: "Study Notes", value: "0", color: "text-primary" },
+            { icon: BookOpen, label: "Study Notes", value: String(notes.length), color: "text-primary" },
             { icon: Brain, label: "AI Sessions", value: "0", color: "text-secondary" },
-            { icon: Zap, label: "Tasks Due", value: "0", color: "text-accent" },
+            { icon: Zap, label: "Tasks Due", value: String(pendingTasks), color: "text-accent" },
           ].map((stat) => (
             <GlassCard key={stat.label} blocky className="flex items-center gap-4">
               <stat.icon size={28} className={stat.color} />
@@ -41,14 +49,14 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* Placeholder for Phase 2 */}
-        <GlassCard blocky className="text-center py-12 space-y-3">
-          <Brain size={48} className="mx-auto text-primary/40" />
-          <h2 className="font-display text-xl font-semibold text-foreground">Your Study Hub</h2>
-          <p className="text-sm text-muted-foreground max-w-md mx-auto">
-            This is where your notes, tasks, and AI study tools will live. We'll build this out in Phase 2 & 3.
-          </p>
-        </GlassCard>
+        {/* Profile */}
+        <ProfileCard />
+
+        {/* Tasks & Notes side by side */}
+        <div className="grid lg:grid-cols-2 gap-6">
+          <TasksPanel />
+          <NotesPanel />
+        </div>
       </div>
     </div>
   );
