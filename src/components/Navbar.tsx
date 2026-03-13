@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, LogOut } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useAuth } from "@/contexts/AuthContext";
 import logo from "@/assets/stud-z-logo.png";
 
 const navLinks = [
@@ -16,7 +17,14 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b-2 border-border">
@@ -46,9 +54,24 @@ export default function Navbar() {
           >
             {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
           </button>
-          <Button variant="blocky" size="sm">
-            Get Started →
-          </Button>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <Link to="/dashboard">
+                <Button variant="blocky" size="sm">Dashboard</Button>
+              </Link>
+              <button
+                onClick={handleSignOut}
+                className="p-2 rounded-none border-2 border-border hover:border-destructive transition-colors text-muted-foreground hover:text-destructive"
+                aria-label="Sign out"
+              >
+                <LogOut size={18} />
+              </button>
+            </div>
+          ) : (
+            <Link to="/auth">
+              <Button variant="blocky" size="sm">Get Started →</Button>
+            </Link>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -81,9 +104,20 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Button variant="blocky" size="sm" className="w-full mt-2">
-            Get Started →
-          </Button>
+          {user ? (
+            <div className="flex gap-2 mt-2">
+              <Link to="/dashboard" className="flex-1" onClick={() => setOpen(false)}>
+                <Button variant="blocky" size="sm" className="w-full">Dashboard</Button>
+              </Link>
+              <Button variant="blocky-outline" size="sm" onClick={handleSignOut}>
+                <LogOut size={16} />
+              </Button>
+            </div>
+          ) : (
+            <Link to="/auth" onClick={() => setOpen(false)}>
+              <Button variant="blocky" size="sm" className="w-full mt-2">Get Started →</Button>
+            </Link>
+          )}
         </div>
       )}
     </nav>
