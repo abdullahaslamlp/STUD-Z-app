@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import React, { ReactNode } from "react";
 
 interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
+  children?: ReactNode;
   glow?: "blue" | "purple" | "none";
   blocky?: boolean;
 }
