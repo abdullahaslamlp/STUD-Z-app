@@ -79,9 +79,11 @@ export default function Index() {
               The AI-powered companion that turns your lecture chaos into organized genius. Built by students, for students.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button variant="blocky" size="lg" className="text-base">
-                Get Started Free →
-              </Button>
+              <Link to="/auth">
+                <Button variant="blocky" size="lg" className="text-base">
+                  Get Started Free →
+                </Button>
+              </Link>
               <Link to="/services">
                 <Button variant="blocky-outline" size="lg" className="text-base w-full sm:w-auto">
                   Explore Features
