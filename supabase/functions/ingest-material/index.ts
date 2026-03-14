@@ -1,5 +1,11 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.4";
+import { configureUnPDF, extractText, getDocumentProxy } from "https://esm.sh/unpdf@1.1.0";
+import * as pdfjs from "https://esm.sh/unpdf@1.1.0/pdfjs";
+import mammoth from "https://esm.sh/mammoth@1.6.0";
+
+// Required in Supabase Edge Functions so PDF.js is available (see unjs/unpdf#3)
+await configureUnPDF({ pdfjs: async () => pdfjs });
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -12,6 +18,20 @@ interface RequestBody {
   userId: string;
   title?: string;
   subject?: string;
+}
+
+async function extractTextFromFile(arrayBuffer: ArrayBuffer, fileExtension: string): Promise<string> {
+  const ext = fileExtension.toLowerCase();
+  if (ext === "pdf") {
+    const pdf = await getDocumentProxy(new Uint8Array(arrayBuffer));
+    const { text } = await extractText(pdf, { mergePages: true });
+    return text?.trim() || "";
+  }
+  if (ext === "docx" || ext === "doc") {
+    const result = await mammoth.extractRawText({ arrayBuffer });
+    return result.value?.trim() || "";
+  }
+  throw new Error(`Unsupported file type: .${ext}. Use PDF or DOCX.`);
 }
 
 serve(async (req) => {
@@ -60,17 +80,40 @@ serve(async (req) => {
       );
     }
 
-    // Extract raw text from the file
-    // For PDF: we send the base64 to the AI model which can read PDFs natively
+    // Extract raw text from PDF/DOCX locally so we send text-only to the AI gateway
+    // (the gateway does not reliably accept file/base64 document uploads)
     const arrayBuffer = await fileData.arrayBuffer();
-    const base64Content = btoa(
-      new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ""),
-    );
-
     const fileExtension = filePath.split(".").pop()?.toLowerCase() || "";
-    const mimeType = fileExtension === "pdf" ? "application/pdf" : "application/octet-stream";
 
-    const systemPrompt = `You are a study notes extraction assistant. Your job is to read the uploaded document and produce clean, well-structured study notes.
+    let rawText: string;
+    try {
+      rawText = await extractTextFromFile(arrayBuffer, fileExtension);
+    } catch (extractErr: unknown) {
+      const msg = extractErr instanceof Error ? extractErr.message : "Text extraction failed";
+      console.error("Extract error:", extractErr);
+      return new Response(
+        JSON.stringify({ error: "Failed to extract text from file", details: msg }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    if (!rawText || rawText.length < 50) {
+      return new Response(
+        JSON.stringify({
+          error: "Document appears empty or could not be read",
+          details: "The file may be scanned (image-only), password-protected, or corrupted.",
+        }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    const maxChars = 120_000;
+    const textForAi =
+      rawText.length > maxChars
+        ? rawText.slice(0, maxChars) + "\n\n[... document truncated for length ...]"
+        : rawText;
+
+    const systemPrompt = `You are a study notes extraction assistant. You will receive raw text from a document. Your job is to turn it into clean, well-structured study notes.
 
 Rules:
 - Ignore headers, footers, watermarks, page numbers, and repetitive boilerplate.
@@ -79,19 +122,7 @@ Rules:
 - Be thorough but concise — capture everything a student would need to study from this document.
 - Do NOT add commentary like "Here are the notes" — just output the notes directly.`;
 
-    const userContent = [
-      {
-        type: "text" as const,
-        text: `Extract comprehensive study notes from this document. ${subject ? `The subject is: ${subject}.` : ""} Focus on key concepts, definitions, and important details.`,
-      },
-      {
-        type: "file" as const,
-        file: {
-          filename: filePath.split("/").pop() || "document",
-          file_data: `data:${mimeType};base64,${base64Content}`,
-        },
-      },
-    ];
+    const userPrompt = `Turn the following document text into comprehensive study notes in markdown. ${subject ? `Subject: ${subject}.` : ""} Focus on key concepts, definitions, and important details.\n\n---\n\n${textForAi}`;
 
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -103,7 +134,7 @@ Rules:
         model: "google/gemini-2.5-flash",
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: userContent },
+          { role: "user", content: userPrompt },
         ],
         temperature: 0.2,
       }),
