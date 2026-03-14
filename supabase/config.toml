@@ -2,3 +2,6 @@ project_id = "iqmkkrktebfysykrdqig"
 
 [functions.ai-assistant]
 verify_jwt = false
+
+[functions.flashcards-from-notes]
+verify_jwt = false

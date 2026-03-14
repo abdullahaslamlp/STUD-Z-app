@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTasks } from "@/hooks/use-tasks";
 import { useStudyNotes } from "@/hooks/use-study-notes";
@@ -37,17 +38,24 @@ export default function Dashboard() {
         <div className="grid sm:grid-cols-3 gap-4">
           {[
             { icon: BookOpen, label: "Study Notes", value: String(notes.length), color: "text-primary" },
-            { icon: Brain, label: "AI Sessions", value: "0", color: "text-secondary" },
+            { icon: Brain, label: "Flashcards", value: "Quiz →", color: "text-secondary", link: "/flashcards" },
             { icon: Zap, label: "Tasks Due", value: String(pendingTasks), color: "text-accent" },
-          ].map((stat) => (
-            <GlassCard key={stat.label} blocky className="flex items-center gap-4">
-              <stat.icon size={28} className={stat.color} />
-              <div>
-                <p className="text-2xl font-display font-bold text-foreground">{stat.value}</p>
-                <p className="text-xs text-muted-foreground">{stat.label}</p>
-              </div>
-            </GlassCard>
-          ))}
+          ].map((stat) => {
+            const inner = (
+              <GlassCard key={stat.label} blocky className="flex items-center gap-4">
+                <stat.icon size={28} className={stat.color} />
+                <div>
+                  <p className="text-2xl font-display font-bold text-foreground">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
+                </div>
+              </GlassCard>
+            );
+            return stat.link ? (
+              <Link key={stat.label} to={stat.link}>{inner}</Link>
+            ) : (
+              <div key={stat.label}>{inner}</div>
+            );
+          })}
         </div>
 
         {/* Profile */}
