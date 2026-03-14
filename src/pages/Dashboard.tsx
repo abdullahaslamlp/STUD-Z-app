@@ -38,7 +38,7 @@ export default function Dashboard() {
         <div className="grid sm:grid-cols-3 gap-4">
           {[
             { icon: BookOpen, label: "Study Notes", value: String(notes.length), color: "text-primary" },
-            { icon: Brain, label: "AI Sessions", value: "0", color: "text-secondary" },
+            { icon: Brain, label: "Flashcards", value: "Quiz →", color: "text-secondary", link: "/flashcards" },
             { icon: Zap, label: "Tasks Due", value: String(pendingTasks), color: "text-accent" },
           ].map((stat) => (
             <GlassCard key={stat.label} blocky className="flex items-center gap-4">
