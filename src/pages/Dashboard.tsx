@@ -8,6 +8,7 @@ import ProfileCard from "@/components/dashboard/ProfileCard";
 import TasksPanel from "@/components/dashboard/TasksPanel";
 import NotesPanel from "@/components/dashboard/NotesPanel";
 import AIAssistantPanel from "@/components/dashboard/AIAssistantPanel";
+import MaterialUploadPanel from "@/components/dashboard/MaterialUploadPanel";
 import { BookOpen, Brain, Zap, LogOut } from "lucide-react";
 
 export default function Dashboard() {
@@ -60,6 +61,9 @@ export default function Dashboard() {
 
         {/* Profile */}
         <ProfileCard />
+
+        {/* Upload Material */}
+        <MaterialUploadPanel />
 
         {/* Tasks & Notes side by side */}
         <div className="grid lg:grid-cols-2 gap-6">
