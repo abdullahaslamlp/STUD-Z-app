@@ -4,7 +4,7 @@ Stud‑Z (Study‑Gen Z) is an AI‑powered study companion web app that helps s
 
 ---
 
-##  Features
+## ✨ Features
 
 - **Secure Auth & Profiles**
   - Email/password + Google sign‑in (Supabase + Lovable).
@@ -32,7 +32,7 @@ Stud‑Z (Study‑Gen Z) is an AI‑powered study companion web app that helps s
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
 - **Frontend**
   - Vite + React + TypeScript
@@ -47,7 +47,7 @@ Stud‑Z (Study‑Gen Z) is an AI‑powered study companion web app that helps s
 
 ---
 
-##  Getting Started (Local Development)
+## 🚀 Getting Started (Local Development)
 
 Prerequisites:
 
