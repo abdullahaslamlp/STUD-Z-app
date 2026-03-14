@@ -1,7 +1,10 @@
-// Supabase Edge Function: ai-assistant
-// Deno runtime
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
+};
 
 interface Task {
   id: string;
@@ -34,16 +37,20 @@ interface RequestBody {
 }
 
 serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
+
   if (req.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
   }
 
   try {
-    const apiKey = Deno.env.get("OPENAI_API_KEY");
-    if (!apiKey) {
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    if (!LOVABLE_API_KEY) {
       return new Response(
-        JSON.stringify({ error: "Missing OPENAI_API_KEY environment variable" }),
-        { status: 500, headers: { "Content-Type": "application/json" } },
+        JSON.stringify({ error: "Missing LOVABLE_API_KEY" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
@@ -53,7 +60,7 @@ serve(async (req) => {
     if (!prompt || typeof prompt !== "string") {
       return new Response(
         JSON.stringify({ error: "Missing or invalid 'prompt' in request body" }),
-        { status: 400, headers: { "Content-Type": "application/json" } },
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
@@ -64,9 +71,7 @@ serve(async (req) => {
             .slice(0, 20)
             .map(
               (t) =>
-                `- [${t.status}] (${t.priority}) ${t.title}${
-                  t.due_date ? ` (due: ${t.due_date})` : ""
-                }${t.description ? ` — ${t.description}` : ""}`,
+                `- [${t.status}] (${t.priority}) ${t.title}${t.due_date ? ` (due: ${t.due_date})` : ""}${t.description ? ` — ${t.description}` : ""}`,
             )
             .join("\n");
 
@@ -77,9 +82,7 @@ serve(async (req) => {
             .slice(0, 20)
             .map(
               (n) =>
-                `- ${n.title}${
-                  n.subject ? ` [${n.subject}]` : ""
-                }: ${n.content ? n.content.slice(0, 200) : ""}`,
+                `- ${n.title}${n.subject ? ` [${n.subject}]` : ""}: ${n.content ? n.content.slice(0, 200) : ""}`,
             )
             .join("\n");
 
@@ -90,9 +93,7 @@ serve(async (req) => {
             .slice(0, 20)
             .map(
               (m) =>
-                `- ${m.title}${
-                  m.subject ? ` [${m.subject}]` : ""
-                }${m.description ? ` — ${m.description}` : ""}`,
+                `- ${m.title}${m.subject ? ` [${m.subject}]` : ""}${m.description ? ` — ${m.description}` : ""}`,
             )
             .join("\n");
 
@@ -124,14 +125,14 @@ Based on this, give a helpful, structured response with:
 3) Any smart tips based on their tasks/notes (if provided).
 `;
 
-    const openaiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini",
+        model: "google/gemini-3-flash-preview",
         messages: [
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
@@ -140,32 +141,41 @@ Based on this, give a helpful, structured response with:
       }),
     });
 
-    if (!openaiResponse.ok) {
-      const errorText = await openaiResponse.text();
-      console.error("OpenAI error:", errorText);
+    if (!response.ok) {
+      if (response.status === 429) {
+        return new Response(
+          JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }),
+          { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
+      if (response.status === 402) {
+        return new Response(
+          JSON.stringify({ error: "AI usage limit reached. Please add credits to continue." }),
+          { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+        );
+      }
+      const errorText = await response.text();
+      console.error("AI gateway error:", response.status, errorText);
       return new Response(
-        JSON.stringify({ error: "LLM request failed", details: errorText }),
-        { status: 502, headers: { "Content-Type": "application/json" } },
+        JSON.stringify({ error: "AI request failed", details: errorText }),
+        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
 
-    const completion = await openaiResponse.json();
+    const completion = await response.json();
     const content =
       completion.choices?.[0]?.message?.content ??
       "I could not generate a response. Please try again.";
 
     return new Response(JSON.stringify({ text: content }), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {
     console.error("ai-assistant error:", err);
     return new Response(
       JSON.stringify({ error: "Unexpected error in ai-assistant function" }),
-      { status: 500, headers: { "Content-Type": "application/json" } },
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   }
 });
-
