@@ -40,15 +40,22 @@ export default function Dashboard() {
             { icon: BookOpen, label: "Study Notes", value: String(notes.length), color: "text-primary" },
             { icon: Brain, label: "Flashcards", value: "Quiz →", color: "text-secondary", link: "/flashcards" },
             { icon: Zap, label: "Tasks Due", value: String(pendingTasks), color: "text-accent" },
-          ].map((stat) => (
-            <GlassCard key={stat.label} blocky className="flex items-center gap-4">
-              <stat.icon size={28} className={stat.color} />
-              <div>
-                <p className="text-2xl font-display font-bold text-foreground">{stat.value}</p>
-                <p className="text-xs text-muted-foreground">{stat.label}</p>
-              </div>
-            </GlassCard>
-          ))}
+          ].map((stat) => {
+            const inner = (
+              <GlassCard key={stat.label} blocky className="flex items-center gap-4">
+                <stat.icon size={28} className={stat.color} />
+                <div>
+                  <p className="text-2xl font-display font-bold text-foreground">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground">{stat.label}</p>
+                </div>
+              </GlassCard>
+            );
+            return stat.link ? (
+              <Link key={stat.label} to={stat.link}>{inner}</Link>
+            ) : (
+              <div key={stat.label}>{inner}</div>
+            );
+          })}
         </div>
 
         {/* Profile */}
