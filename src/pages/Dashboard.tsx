@@ -6,6 +6,7 @@ import GlassCard from "@/components/GlassCard";
 import ProfileCard from "@/components/dashboard/ProfileCard";
 import TasksPanel from "@/components/dashboard/TasksPanel";
 import NotesPanel from "@/components/dashboard/NotesPanel";
+import AIAssistantPanel from "@/components/dashboard/AIAssistantPanel";
 import { BookOpen, Brain, Zap, LogOut } from "lucide-react";
 
 export default function Dashboard() {
@@ -57,6 +58,9 @@ export default function Dashboard() {
           <TasksPanel />
           <NotesPanel />
         </div>
+
+        {/* AI Study Assistant */}
+        <AIAssistantPanel />
       </div>
     </div>
   );
