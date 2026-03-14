@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { FunctionsHttpError } from "@supabase/supabase-js";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
@@ -40,7 +41,18 @@ export function useMaterialIngestion() {
         },
       });
 
-      if (fnError) throw new Error(fnError.message);
+      if (fnError) {
+        let message = fnError.message;
+        if (fnError instanceof FunctionsHttpError && fnError.context) {
+          try {
+            const body = (await fnError.context.json()) as { error?: string; details?: string };
+            message = body.details ? `${body.error ?? "Error"}: ${body.details}` : (body.error ?? message);
+          } catch {
+            // keep fnError.message if parsing fails
+          }
+        }
+        throw new Error(message);
+      }
       if (data?.error) throw new Error(data.error);
 
       // 3. Refresh notes list

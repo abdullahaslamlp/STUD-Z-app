@@ -23,9 +23,9 @@ serve(async (req) => {
   if (req.method !== "POST") return new Response("Method not allowed", { status: 405 });
 
   try {
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) {
-      return new Response(JSON.stringify({ error: "Missing LOVABLE_API_KEY" }), {
+    const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
+    if (!GEMINI_API_KEY) {
+      return new Response(JSON.stringify({ error: "Missing GEMINI_API_KEY. Set it in Supabase Edge Function secrets." }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -46,64 +46,30 @@ serve(async (req) => {
       .map((n) => `## ${n.title}${n.subject ? ` [${n.subject}]` : ""}\n${n.content ?? "(no content)"}`)
       .join("\n\n");
 
-    const systemPrompt = `You are a university exam question generator. Given study notes, create multiple-choice questions (MCQs) that test conceptual understanding. Each question must have exactly 4 options with exactly one correct answer. Provide a brief explanation referencing the source material.`;
+    const systemPrompt = `You are a university exam question generator. Given study notes, create multiple-choice questions (MCQs) that test conceptual understanding. Each question must have exactly 4 options with exactly one correct answer. Provide a brief explanation referencing the source material.
 
-    const userPrompt = `Create exactly ${num_questions} MCQ questions at ${difficulty} difficulty from these study notes:\n\n${notesSummary}`;
+You must respond with ONLY a valid JSON object, no other text or markdown. The JSON must have this exact structure:
+{"flashcards":[{"question":"...","options":["A","B","C","D"],"correctIndex":0,"explanation":"..."}]}
+correctIndex is 0-based (0 = first option, 1 = second, etc.).`;
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
-        ],
-        temperature: 0.6,
-        tools: [
-          {
-            type: "function",
-            function: {
-              name: "return_flashcards",
-              description: "Return the generated MCQ flashcards as structured data.",
-              parameters: {
-                type: "object",
-                properties: {
-                  flashcards: {
-                    type: "array",
-                    items: {
-                      type: "object",
-                      properties: {
-                        question: { type: "string" },
-                        options: {
-                          type: "array",
-                          items: { type: "string" },
-                          minItems: 4,
-                          maxItems: 4,
-                        },
-                        correctIndex: {
-                          type: "integer",
-                          description: "0-based index of the correct option",
-                        },
-                        explanation: { type: "string" },
-                      },
-                      required: ["question", "options", "correctIndex", "explanation"],
-                      additionalProperties: false,
-                    },
-                  },
-                },
-                required: ["flashcards"],
-                additionalProperties: false,
-              },
-            },
+    const userPrompt = `Create exactly ${num_questions} MCQ questions at ${difficulty} difficulty from these study notes. Return ONLY the JSON object with a "flashcards" array.\n\n${notesSummary}`;
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+          generationConfig: {
+            temperature: 0.6,
+            maxOutputTokens: 8192,
+            responseMimeType: "application/json",
           },
-        ],
-        tool_choice: { type: "function", function: { name: "return_flashcards" } },
-      }),
-    });
+        }),
+      },
+    );
 
     if (!response.ok) {
       if (response.status === 429) {
@@ -111,32 +77,25 @@ serve(async (req) => {
           status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      if (response.status === 402) {
-        return new Response(JSON.stringify({ error: "AI usage limit reached. Please add credits." }), {
-          status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
       const errorText = await response.text();
-      console.error("AI gateway error:", response.status, errorText);
+      console.error("Gemini API error:", response.status, errorText);
       return new Response(JSON.stringify({ error: "AI request failed", details: errorText }), {
         status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const completion = await response.json();
-
-    // Extract tool call result
-    const toolCall = completion.choices?.[0]?.message?.tool_calls?.[0];
-    if (!toolCall?.function?.arguments) {
+    const result = await response.json();
+    const textPart = result.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!textPart) {
       return new Response(JSON.stringify({ error: "AI did not return structured flashcards." }), {
         status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    let flashcards;
+    let flashcards: unknown[];
     try {
-      const parsed = JSON.parse(toolCall.function.arguments);
-      flashcards = parsed.flashcards;
+      const parsed = JSON.parse(textPart.trim());
+      flashcards = Array.isArray(parsed?.flashcards) ? parsed.flashcards : (Array.isArray(parsed) ? parsed : []);
     } catch {
       return new Response(JSON.stringify({ error: "Failed to parse AI response." }), {
         status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },

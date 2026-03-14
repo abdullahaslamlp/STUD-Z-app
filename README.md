@@ -18,7 +18,7 @@ Stud‑Z (Study‑Gen Z) is an AI‑powered study companion web app that helps s
 - **AI Study Companion**
   - “Stud‑Z” assistant panel on the dashboard.
   - Generates personalized study plans and tips grounded in your own tasks and notes.
-  - Powered by Lovable AI Gateway (no direct LLM keys needed in the frontend).
+  - Powered by the **Gemini API** (use your own API key; set `GEMINI_API_KEY` in Supabase Edge Function secrets).
 
 - **Flashcards & Testing**
   - Flashcards page that generates MCQ quizzes from your existing notes.
@@ -42,7 +42,7 @@ Stud‑Z (Study‑Gen Z) is an AI‑powered study companion web app that helps s
 
 - **Backend / Infra**
   - Supabase (Auth, Postgres, Storage, Edge Functions)
-  - Lovable AI Gateway (Gemini‑based models for assistant, flashcards, and ingestion)
+  - **Gemini API** (assistant, flashcards, document ingestion) — set `GEMINI_API_KEY` in Supabase; see [SETUP.md](./SETUP.md).
   - Row Level Security (RLS) for all user data
 
 ---
@@ -53,7 +53,7 @@ Prerequisites:
 
 - Node.js and npm installed
 - A Supabase project set up
-- Lovable‑generated environment variables (if you cloned from Lovable, most are already wired)
+- A Gemini API key and Supabase configured (see **[SETUP.md](./SETUP.md)** for secrets and database migrations)
 
 1. **Clone the repository**
 
