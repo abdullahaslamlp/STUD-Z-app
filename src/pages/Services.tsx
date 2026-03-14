@@ -1,4 +1,5 @@
 import GlassCard from "@/components/GlassCard";
+import { Badge } from "@/components/ui/badge";
 import { Zap, BookOpen, Brain, Mic, Clock, Shield } from "lucide-react";
 
 const features = [
@@ -7,6 +8,7 @@ const features = [
     title: "LiveSync Audio",
     desc: "Record your lectures and get instant, simplified transcripts powered by AI. Never miss a word again — even when the prof speed-runs through 50 slides.",
     color: "bg-primary",
+    inProgress: true,
   },
   {
     icon: BookOpen,
@@ -25,6 +27,7 @@ const features = [
     title: "Cram Mode",
     desc: "Finals tomorrow? Cram Mode condenses your entire semester's notes into bite-sized summaries prioritized by exam relevance.",
     color: "bg-primary",
+    inProgress: true,
   },
   {
     icon: Zap,
@@ -59,7 +62,12 @@ export default function Services() {
               <div className={`w-12 h-12 rounded-none ${f.color} flex items-center justify-center pixel-border-sm`}>
                 <f.icon size={24} className="text-primary-foreground" />
               </div>
-              <h3 className="font-display font-semibold text-xl text-foreground">{f.title}</h3>
+              <div className="flex items-center gap-2 flex-wrap">
+                {(f as { inProgress?: boolean }).inProgress && (
+                  <Badge variant="secondary" className="rounded-none text-[10px] font-normal">In progress</Badge>
+                )}
+                <h3 className="font-display font-semibold text-xl text-foreground">{f.title}</h3>
+              </div>
               <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
             </GlassCard>
           ))}

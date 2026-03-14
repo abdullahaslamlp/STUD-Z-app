@@ -26,6 +26,13 @@ export default function About() {
           </p>
         </div>
 
+        {/* Project info */}
+        <GlassCard blocky className="max-w-3xl mx-auto mb-12 px-6 py-5">
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Stud‑Z (Study‑Gen Z) is an AI‑powered study companion web app built with React, Supabase, and Lovable AI that helps students organize tasks, take structured notes, upload PDFs/DOCX for automatic note extraction, and generate personalized MCQ flashcard quizzes and study plans from their own content.
+          </p>
+        </GlassCard>
+
         {/* Creator */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-24">
           {founders.map((f) => (

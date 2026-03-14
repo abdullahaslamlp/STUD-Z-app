@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import GlassCard from "@/components/GlassCard";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Zap, BookOpen, Brain, X, Check, Star, Quote } from "lucide-react";
 import heroImg from "@/assets/hero-students.jpg";
@@ -145,7 +146,7 @@ export default function Index() {
 
           <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
-              { icon: Zap, title: "LiveSync Audio", desc: "Record & get instant simplified transcripts", color: "bg-primary" },
+              { icon: Zap, title: "LiveSync Audio", desc: "Record & get instant simplified transcripts", color: "bg-primary", inProgress: true },
               { icon: BookOpen, title: "Flashcard Forge", desc: "One-click notes to active recall sets", color: "bg-secondary" },
               { icon: Brain, title: "Brain-Dump Chat", desc: "AI tutor trained on your class notes", color: "bg-accent" },
             ].map((f) => (
@@ -153,7 +154,12 @@ export default function Index() {
                 <div className={`w-12 h-12 mx-auto rounded-none ${f.color} flex items-center justify-center pixel-border-sm`}>
                   <f.icon size={24} className="text-primary-foreground" />
                 </div>
-                <h3 className="font-display font-semibold text-lg text-foreground">{f.title}</h3>
+                <div className="flex items-center justify-center gap-2 flex-wrap">
+                  {"inProgress" in f && f.inProgress && (
+                    <Badge variant="secondary" className="rounded-none text-[10px] font-normal">In progress</Badge>
+                  )}
+                  <h3 className="font-display font-semibold text-lg text-foreground">{f.title}</h3>
+                </div>
                 <p className="text-sm text-muted-foreground">{f.desc}</p>
               </GlassCard>
             ))}
