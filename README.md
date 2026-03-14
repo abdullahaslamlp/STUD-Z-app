@@ -1,26 +1,65 @@
-# Welcome to your Lovable project
+# Stud‑Z — AI Study Companion
 
-## Project info
+Stud‑Z (Study‑Gen Z) is an AI‑powered study companion web app that helps students turn their own materials into focused revision workflows. It combines task management, rich study notes, AI assistant guidance, PDF/DOCX ingestion, and MCQ flashcard quizzes into a single dashboard.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+- **Secure Auth & Profiles**
+  - Email/password + Google sign‑in (Supabase + Lovable).
+  - Per‑user profile with university, major, and semester.
 
-**Use Lovable**
+- **Tasks & Study Notes**
+  - Create, update, and track study tasks with priority and due dates.
+  - Structured study notes with subjects and tags, persisted in Supabase.
+  - All data is scoped per user via Row Level Security (RLS).
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- **AI Study Companion**
+  - “Stud‑Z” assistant panel on the dashboard.
+  - Generates personalized study plans and tips grounded in your own tasks and notes.
+  - Powered by Lovable AI Gateway (no direct LLM keys needed in the frontend).
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Flashcards & Testing**
+  - Flashcards page that generates MCQ quizzes from your existing notes.
+  - Difficulty selection (easy / medium / hard) and question count.
+  - Instant feedback, explanations, and score summary.
 
-**Use your preferred IDE**
+- **PDF / DOCX Ingestion**
+  - Upload PDF or DOCX files as “study material”.
+  - Edge function uses AI to read the document and extract structured, markdown‑style notes.
+  - Extracted notes are saved into your `study_notes` and show up in the dashboard.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🛠 Tech Stack
 
-Follow these steps:
+- **Frontend**
+  - Vite + React + TypeScript
+  - React Router
+  - Tailwind CSS + shadcn‑ui components
+  - TanStack Query for data fetching and caching
+
+- **Backend / Infra**
+  - Supabase (Auth, Postgres, Storage, Edge Functions)
+  - Lovable AI Gateway (Gemini‑based models for assistant, flashcards, and ingestion)
+  - Row Level Security (RLS) for all user data
+
+---
+
+## 🚀 Getting Started (Local Development)
+
+Prerequisites:
+
+- Node.js and npm installed
+- A Supabase project set up
+- Lovable‑generated environment variables (if you cloned from Lovable, most are already wired)
+
+1. **Clone the repository**
+
+```bash
+git clone <YOUR_GIT_URL>
+cd <YOUR_PROJECT_NAME>
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
@@ -36,38 +75,3 @@ npm i
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
