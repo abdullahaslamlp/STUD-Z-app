@@ -62,6 +62,9 @@ export default function Dashboard() {
         {/* Profile */}
         <ProfileCard />
 
+        {/* Upload Material */}
+        <MaterialUploadPanel />
+
         {/* Tasks & Notes side by side */}
         <div className="grid lg:grid-cols-2 gap-6">
           <TasksPanel />
