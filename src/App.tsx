@@ -48,6 +48,14 @@ const App = () => (
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path="/flashcards"
+                element={
+                  <ProtectedRoute>
+                    <Flashcards />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
