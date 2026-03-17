@@ -31,6 +31,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AuthProvider>
+           <AIProviderProvider>
             <Navbar />
             <Routes>
               <Route path="/" element={<Index />} />
