@@ -4,6 +4,7 @@ import { FunctionsHttpError } from "@supabase/supabase-js";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAIProvider } from "@/contexts/AIProviderContext";
 
 export type IngestionStatus = "idle" | "uploading" | "processing" | "done" | "error";
 
@@ -11,6 +12,7 @@ export function useMaterialIngestion() {
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { aiProvider } = useAIProvider();
   const [status, setStatus] = useState<IngestionStatus>("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -19,7 +21,6 @@ export function useMaterialIngestion() {
     setError(null);
 
     try {
-      // 1. Upload to storage
       setStatus("uploading");
       const ext = file.name.split(".").pop()?.toLowerCase() || "pdf";
       const filePath = `${user.id}/${crypto.randomUUID()}.${ext}`;
@@ -30,7 +31,6 @@ export function useMaterialIngestion() {
 
       if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
 
-      // 2. Call edge function to extract notes
       setStatus("processing");
       const { data, error: fnError } = await supabase.functions.invoke("ingest-material", {
         body: {
@@ -38,6 +38,7 @@ export function useMaterialIngestion() {
           userId: user.id,
           title: meta?.title || file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " "),
           subject: meta?.subject || null,
+          aiProvider,
         },
       });
 
@@ -47,19 +48,15 @@ export function useMaterialIngestion() {
           try {
             const body = (await fnError.context.json()) as { error?: string; details?: string };
             message = body.details ? `${body.error ?? "Error"}: ${body.details}` : (body.error ?? message);
-          } catch {
-            // keep fnError.message if parsing fails
-          }
+          } catch { /* keep fnError.message */ }
         }
         throw new Error(message);
       }
       if (data?.error) throw new Error(data.error);
 
-      // 3. Refresh notes list
       queryClient.invalidateQueries({ queryKey: ["study_notes", user.id] });
       setStatus("done");
       toast({ title: "Notes extracted from your document! 📄✨" });
-
       return data.note;
     } catch (err: any) {
       setStatus("error");
@@ -68,10 +65,7 @@ export function useMaterialIngestion() {
     }
   };
 
-  const reset = () => {
-    setStatus("idle");
-    setError(null);
-  };
+  const reset = () => { setStatus("idle"); setError(null); };
 
   return { ingest, status, error, reset };
 }

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { AIProviderProvider } from "@/contexts/AIProviderContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -30,6 +31,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AuthProvider>
+           <AIProviderProvider>
             <Navbar />
             <Routes>
               <Route path="/" element={<Index />} />
@@ -59,6 +61,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
+           </AIProviderProvider>
           </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>

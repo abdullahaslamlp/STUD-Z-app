@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useTasks } from "@/hooks/use-tasks";
 import { useStudyNotes } from "@/hooks/use-study-notes";
 import { useToast } from "@/hooks/use-toast";
+import { useAIProvider } from "@/contexts/AIProviderContext";
 
 export interface AssistantMessage {
   role: "user" | "assistant";
@@ -20,38 +21,30 @@ export function useAIAssistant() {
   const { tasks } = useTasks();
   const { notes } = useStudyNotes();
   const { toast } = useToast();
+  const { aiProvider } = useAIProvider();
 
   const mutation = useMutation({
-    mutationFn: async ({ prompt, useTasks, useNotes, useMaterials }: AskOptions) => {
-      const payload = {
-        prompt,
-        tasks: useTasks ? tasks : [],
-        notes: useNotes ? notes : [],
-        // Materials UI not wired yet; keep shape for future extension.
-        materials: useMaterials ? [] : [],
-      };
-
+    mutationFn: async ({ prompt, useTasks: ut, useNotes: un, useMaterials: um }: AskOptions) => {
       const { data, error } = await supabase.functions.invoke("ai-assistant", {
-        body: payload,
+        body: {
+          prompt,
+          tasks: ut ? tasks : [],
+          notes: un ? notes : [],
+          materials: um ? [] : [],
+          aiProvider,
+        },
       });
-
-      if (error) {
-        throw error;
-      }
-
+      if (error) throw error;
       return data as { text: string };
     },
     onError: (error: any) => {
       toast({
         title: "AI Assistant error",
-        description: error.message ?? "Something went wrong while contacting Stud-Z.",
+        description: error.message ?? "Something went wrong.",
         variant: "destructive",
       });
     },
   });
 
-  return {
-    ask: mutation,
-  };
+  return { ask: mutation };
 }
-
