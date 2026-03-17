@@ -9,6 +9,7 @@ import TasksPanel from "@/components/dashboard/TasksPanel";
 import NotesPanel from "@/components/dashboard/NotesPanel";
 import AIAssistantPanel from "@/components/dashboard/AIAssistantPanel";
 import MaterialUploadPanel from "@/components/dashboard/MaterialUploadPanel";
+import AIProviderSelector from "@/components/dashboard/AIProviderSelector";
 import { BookOpen, Brain, Zap, LogOut } from "lucide-react";
 
 export default function Dashboard() {
