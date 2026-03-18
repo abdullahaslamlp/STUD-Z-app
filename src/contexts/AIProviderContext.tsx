@@ -13,10 +13,7 @@ const AIProviderContext = createContext<AIProviderContextType>({
 });
 
 export function AIProviderProvider({ children }: { children: ReactNode }) {
-  const [aiProvider, setAIProviderState] = useState<AIProvider>(() => {
-    const stored = localStorage.getItem("stud-z-ai-provider");
-    return stored === "gemini" ? "gemini" : "lovable";
-  });
+  const [aiProvider, setAIProviderState] = useState<AIProvider>("gemini");
 
   const setAIProvider = (p: AIProvider) => {
     setAIProviderState(p);
