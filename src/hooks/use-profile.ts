@@ -38,8 +38,10 @@ export function useProfile() {
     mutationFn: async (updates: Partial<Pick<Profile, "full_name" | "university" | "major" | "semester">>) => {
       const { data, error } = await supabase
         .from("profiles")
-        .update(updates)
-        .eq("user_id", user!.id)
+        .upsert(
+          { user_id: user!.id, ...updates },
+          { onConflict: "user_id" }
+        )
         .select()
         .single();
       if (error) throw error;
