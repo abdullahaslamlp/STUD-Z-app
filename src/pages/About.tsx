@@ -1,5 +1,5 @@
 import GlassCard from "@/components/GlassCard";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, Linkedin, Github } from "lucide-react";
 import abdullahImg from "@/assets/abdullah.jpeg";
 
 const founders = [
@@ -38,6 +38,14 @@ export default function About() {
                 <h3 className="font-display font-semibold text-xl text-foreground">{f.name}</h3>
                 <p className="text-sm text-primary font-medium">{f.role}</p>
                 <p className="text-xs text-muted-foreground">{f.title}</p>
+              </div>
+              <div className="flex items-center justify-center gap-3 pt-2">
+                <a href="https://www.linkedin.com/in/abdullahaslamlp/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Linkedin size={20} />
+                </a>
+                <a href="https://github.com/abdullahaslamlp" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Github size={20} />
+                </a>
               </div>
             </GlassCard>
           ))}
