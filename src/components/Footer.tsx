@@ -24,12 +24,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-3">Socials</h4>
+            <h4 className="font-display font-semibold text-foreground mb-3">Connect</h4>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <a href="#" className="block hover:text-primary transition-colors">Instagram</a>
-              <a href="#" className="block hover:text-primary transition-colors">TikTok</a>
-              <a href="#" className="block hover:text-primary transition-colors">Twitter / X</a>
-              <a href="#" className="block hover:text-primary transition-colors">Discord</a>
+              <a href="https://www.linkedin.com/in/abdullahaslamlp/" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">LinkedIn</a>
+              <a href="https://github.com/abdullahaslamlp" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">GitHub</a>
             </div>
           </div>
 
