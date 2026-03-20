@@ -38,7 +38,7 @@ const features = [
   {
     icon: Shield,
     title: "Privacy First",
-    desc: "Your notes stay yours. End-to-end encryption and zero data selling. We're students too — we know how sketchy that feels.",
+    desc: "Your notes stay yours. End-to-end encryption and zero data selling. We're students too — we know how sketchy that feels. Trust no cap 🔒",
     color: "bg-accent",
   },
 ];
