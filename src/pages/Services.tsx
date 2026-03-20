@@ -32,7 +32,7 @@ const features = [
   {
     icon: Zap,
     title: "Smart Highlights",
-    desc: "AI automatically highlights the most important concepts, formulas, and definitions across all your notes. No more yellow-highlighter roulette.",
+    desc: "AI automatically highlights the most important concepts, formulas, and definitions across all your notes. No more yellow-highlighter roulette. We ate with this one 🔥",
     color: "bg-secondary",
   },
   {
