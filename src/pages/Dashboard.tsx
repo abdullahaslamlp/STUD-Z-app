@@ -62,8 +62,7 @@ export default function Dashboard() {
         {/* Profile */}
         <ProfileCard />
 
-        {/* AI Provider Selection */}
-        <AIProviderSelector />
+        {/* Upload Material */}
 
         {/* Upload Material */}
         <MaterialUploadPanel />

@@ -52,7 +52,7 @@ export default function Services() {
             Our <span className="text-primary">Features</span>
           </h1>
           <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            Every tool you need to ace your studies — all in one place.
+            Every tool you need to ace your studies — all in one place. We're literally that friend 🫶
           </p>
         </div>
 

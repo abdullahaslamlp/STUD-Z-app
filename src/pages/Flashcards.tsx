@@ -55,6 +55,16 @@ export default function Flashcards() {
 
   const isFinished = cards.length > 0 && currentIndex >= cards.length;
 
+  const getCorrectMessage = () => {
+    const msgs = ["Sheeeesh! You ate that! 🔥", "W answer bestie! 💅", "Big brain energy rn 🧠✨", "Slay! That's the one! 💯", "No cap, you're cracked at this! 🎯"];
+    return msgs[Math.floor(Math.random() * msgs.length)];
+  };
+
+  const getWrongMessage = () => {
+    const msgs = ["Oof, it's giving… wrong answer 💀", "That ain't it chief 😭", "L take but we move 🫡", "Bruh moment fr fr 😩", "Not the vibe… try again bestie 🥲"];
+    return msgs[Math.floor(Math.random() * msgs.length)];
+  };
+
   return (
     <div className="min-h-screen bg-background pt-20 px-4">
       <div className="container mx-auto max-w-3xl py-8 space-y-8">
@@ -63,7 +73,7 @@ export default function Flashcards() {
             <Brain className="text-primary" size={32} /> Flashcards & Testing
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
-            Generate MCQ quizzes from your study notes using AI.
+            Quiz yourself from your own notes. It's giving main character energy 💅
           </p>
         </div>
 
@@ -75,12 +85,12 @@ export default function Flashcards() {
 
           {notesCount === 0 ? (
             <p className="text-sm text-muted-foreground">
-              You need to add some study notes first before generating flashcards.
+              You need to drop some study notes first before we can cook flashcards for you bestie 📝
             </p>
           ) : (
             <>
               <p className="text-sm text-muted-foreground">
-                Using all <strong>{notesCount}</strong> note{notesCount !== 1 ? "s" : ""} as source material.
+                Using all <strong>{notesCount}</strong> note{notesCount !== 1 ? "s" : ""} as source material. Let's lock in 🔒
               </p>
               <div className="flex flex-wrap gap-3 items-end">
                 <div className="space-y-1">
@@ -105,9 +115,9 @@ export default function Flashcards() {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="easy">Easy</SelectItem>
-                      <SelectItem value="medium">Medium</SelectItem>
-                      <SelectItem value="hard">Hard</SelectItem>
+                      <SelectItem value="easy">Chill 😌</SelectItem>
+                      <SelectItem value="medium">Mid 🤔</SelectItem>
+                      <SelectItem value="hard">Demon Mode 😈</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -119,9 +129,9 @@ export default function Flashcards() {
                   disabled={generate.isPending}
                 >
                   {generate.isPending ? (
-                    <><Loader2 size={14} className="mr-1 animate-spin" /> Generating...</>
+                    <><Loader2 size={14} className="mr-1 animate-spin" /> Cooking...</>
                   ) : (
-                    "Generate Quiz"
+                    "Let's Cook 🔥"
                   )}
                 </Button>
               </div>
@@ -132,15 +142,17 @@ export default function Flashcards() {
         {/* Finished summary */}
         {isFinished && (
           <GlassCard blocky className="text-center space-y-4">
-            <h3 className="font-display text-2xl font-bold text-foreground">Quiz Complete! 🎉</h3>
+            <h3 className="font-display text-2xl font-bold text-foreground">
+              {score.correct / cards.length >= 0.8 ? "You absolutely ate that! 💅🔥" : score.correct / cards.length >= 0.5 ? "Not bad bestie, we're getting there! 📈" : "It's okay fam, we bounce back 🫡"}
+            </h3>
             <div className="flex justify-center gap-6">
               <div className="text-center">
                 <p className="text-3xl font-bold text-secondary">{score.correct}</p>
-                <p className="text-xs text-muted-foreground">Correct</p>
+                <p className="text-xs text-muted-foreground">W's</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-destructive">{score.wrong}</p>
-                <p className="text-xs text-muted-foreground">Wrong</p>
+                <p className="text-xs text-muted-foreground">L's</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-primary">
@@ -150,7 +162,7 @@ export default function Flashcards() {
               </div>
             </div>
             <Button variant="blocky-outline" size="sm" onClick={handleRestart}>
-              <RotateCcw size={14} className="mr-1" /> Try Again
+              <RotateCcw size={14} className="mr-1" /> Run it back 🔄
             </Button>
           </GlassCard>
         )}
@@ -160,11 +172,11 @@ export default function Flashcards() {
           <GlassCard blocky className="space-y-5">
             <div className="flex items-center justify-between">
               <Badge variant="secondary" className="rounded-none text-xs">
-                Question {currentIndex + 1} / {cards.length}
+                Q {currentIndex + 1} / {cards.length}
               </Badge>
               <div className="flex gap-2 text-xs">
-                <span className="text-secondary font-semibold">{score.correct} ✓</span>
-                <span className="text-destructive font-semibold">{score.wrong} ✗</span>
+                <span className="text-secondary font-semibold">{score.correct} W</span>
+                <span className="text-destructive font-semibold">{score.wrong} L</span>
               </div>
             </div>
 
@@ -204,9 +216,14 @@ export default function Flashcards() {
             </div>
 
             {revealed && (
-              <div className="p-3 border-2 border-accent/40 bg-accent/5 text-sm text-foreground space-y-2">
-                <p className="font-semibold text-accent text-xs uppercase tracking-wide">Explanation</p>
-                <p>{current.explanation}</p>
+              <div className="space-y-2">
+                <div className={`p-3 border-2 text-sm font-semibold ${selected === current.correctIndex ? "border-secondary/40 bg-secondary/10 text-secondary" : "border-destructive/40 bg-destructive/10 text-destructive"}`}>
+                  {selected === current.correctIndex ? getCorrectMessage() : getWrongMessage()}
+                </div>
+                <div className="p-3 border-2 border-accent/40 bg-accent/5 text-sm text-foreground space-y-2">
+                  <p className="font-semibold text-accent text-xs uppercase tracking-wide">The Tea ☕</p>
+                  <p>{current.explanation}</p>
+                </div>
               </div>
             )}
 
