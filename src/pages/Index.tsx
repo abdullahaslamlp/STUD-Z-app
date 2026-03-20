@@ -5,20 +5,19 @@ import { Link } from "react-router-dom";
 import { Zap, BookOpen, Brain, X, Check, Star, Quote } from "lucide-react";
 import heroImg from "@/assets/hero-students.jpg";
 import logo from "@/assets/stud-z-logo.png";
-import StudyBuddy from "@/components/StudyBuddy";
 
 const oldWay = [
-  "Typing notes while missing half the lecture 😴",
-  "Manually making flashcards at 1 AM like a boomer",
-  "Ctrl+F-ing through 200 slides before finals 💀",
-  "Stress. Burnout. Rinse & repeat. No cap.",
+  "Typing notes while missing half the lecture",
+  "Manually making flashcards at 1 AM",
+  "Ctrl+F-ing through 200 slides before finals",
+  "Stress. Burnout. Repeat.",
 ];
 
 const studZWay = [
-  "Instant AI transcription — just hit record 🎙️",
-  "Auto-generated flashcards in one click, it's giving effortless",
-  "Chat with your notes like they're your bestie tutor 🧠",
-  "Your 2 AM cram-session savior, fr fr 🫡",
+  "Instant AI transcription — just hit record",
+  "Auto-generated flashcards in one click",
+  "Chat with your notes like they're a tutor",
+  "Your 2 AM cram-session savior",
 ];
 
 const testimonials = [
@@ -78,17 +77,17 @@ export default function Index() {
               <span className="text-primary">Not Harder</span>
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              The AI-powered study bestie that turns your lecture chaos into organized genius. Built by students, for students. No cap 🔥
+              The AI-powered companion that turns your lecture chaos into organized genius. Built by students, for students.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link to="/auth">
                 <Button variant="blocky" size="lg" className="text-base">
-                  Let's Lock In →
+                  Get Started Free →
                 </Button>
               </Link>
               <Link to="/services">
                 <Button variant="blocky-outline" size="lg" className="text-base w-full sm:w-auto">
-                  Peep the Features 👀
+                  Explore Features
                 </Button>
               </Link>
             </div>
@@ -100,16 +99,16 @@ export default function Index() {
       <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-4 text-foreground">
-            Why <span className="text-primary">Stud-Z</span> Hits Different
+            Why <span className="text-primary">Stud-Z</span>?
           </h2>
           <p className="text-center text-muted-foreground mb-16 max-w-xl mx-auto">
-            Traditional studying is giving 💀. Here's how we fix it.
+            Traditional studying is broken. Here's how we fix it.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <GlassCard blocky className="space-y-4 border-destructive/40">
               <h3 className="font-display text-xl font-semibold text-destructive flex items-center gap-2">
-                <X size={20} /> The Old Way (cringe)
+                <X size={20} /> The Old Way
               </h3>
               <ul className="space-y-3">
                 {oldWay.map((item, i) => (
@@ -123,7 +122,7 @@ export default function Index() {
 
             <GlassCard blocky glow="blue" className="space-y-4 border-primary/40">
               <h3 className="font-display text-xl font-semibold text-primary flex items-center gap-2">
-                <Zap size={20} /> The Stud-Z Way (slay)
+                <Zap size={20} /> The Stud-Z Way
               </h3>
               <ul className="space-y-3">
                 {studZWay.map((item, i) => (
@@ -142,7 +141,7 @@ export default function Index() {
       <section className="py-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-16 text-foreground">
-            Core <span className="text-secondary">Superpowers</span> ⚡
+            Core <span className="text-secondary">Superpowers</span>
           </h2>
 
           <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -178,10 +177,10 @@ export default function Index() {
       <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-4 text-foreground">
-            What the <span className="text-primary">Gang</span> Says 🗣️
+            What <span className="text-primary">Students</span> Say
           </h2>
           <p className="text-center text-muted-foreground mb-16 max-w-xl mx-auto">
-            Real reviews from real students across Pakistan. Unfiltered.
+            Real reviews from real students across Pakistan.
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -207,9 +206,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
-      {/* Motivational Study Buddy */}
-      <StudyBuddy />
     </div>
   );
 }

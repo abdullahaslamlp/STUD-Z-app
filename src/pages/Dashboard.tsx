@@ -9,6 +9,7 @@ import TasksPanel from "@/components/dashboard/TasksPanel";
 import NotesPanel from "@/components/dashboard/NotesPanel";
 import AIAssistantPanel from "@/components/dashboard/AIAssistantPanel";
 import MaterialUploadPanel from "@/components/dashboard/MaterialUploadPanel";
+import AIProviderSelector from "@/components/dashboard/AIProviderSelector";
 import { BookOpen, Brain, Zap, LogOut } from "lucide-react";
 
 export default function Dashboard() {
@@ -26,9 +27,9 @@ export default function Dashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-display font-bold text-foreground">
-              Yo, <span className="text-primary">{displayName}</span> 👋
+              Hey, <span className="text-primary">{displayName}</span> 👋
             </h1>
-            <p className="text-muted-foreground text-sm mt-1">Let's lock in and crush today's goals fr fr 💪</p>
+            <p className="text-muted-foreground text-sm mt-1">Ready to crush today's study goals?</p>
           </div>
           <Button variant="blocky-outline" size="sm" onClick={signOut}>
             <LogOut size={16} className="mr-1" /> Sign Out
@@ -62,7 +63,8 @@ export default function Dashboard() {
         {/* Profile */}
         <ProfileCard />
 
-        {/* Upload Material */}
+        {/* AI Provider Selection */}
+        <AIProviderSelector />
 
         {/* Upload Material */}
         <MaterialUploadPanel />
