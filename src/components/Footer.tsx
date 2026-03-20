@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="border-t-2 border-border bg-muted/50">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <img src={logo} alt="Stud-Z" className="h-8 w-8 rounded-sm pixel-border-sm" />
@@ -20,6 +20,16 @@ export default function Footer() {
               {[{ l: "Home", p: "/" }, { l: "Services", p: "/services" }, { l: "About", p: "/about" }, { l: "Tech Stack", p: "/tech" }, { l: "Contact", p: "/contact" }].map((i) => (
                 <Link key={i.p} to={i.p} className="block text-sm text-muted-foreground hover:text-primary transition-colors">{i.l}</Link>
               ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-display font-semibold text-foreground mb-3">Socials</h4>
+            <div className="space-y-2 text-sm text-muted-foreground">
+              <a href="#" className="block hover:text-primary transition-colors">Instagram</a>
+              <a href="#" className="block hover:text-primary transition-colors">TikTok</a>
+              <a href="#" className="block hover:text-primary transition-colors">Twitter / X</a>
+              <a href="#" className="block hover:text-primary transition-colors">Discord</a>
             </div>
           </div>
 
