@@ -6,7 +6,7 @@ const features = [
   {
     icon: Mic,
     title: "LiveSync Audio",
-    desc: "Record your lectures and get instant, simplified transcripts powered by AI. Never miss a word again — even when the prof speed-runs through 50 slides.",
+    desc: "Record your lectures and get instant, simplified transcripts powered by AI. Never miss a word again — even when the prof speed-runs through 50 slides. It's giving secretary energy 💅",
     color: "bg-primary",
     inProgress: true,
   },
