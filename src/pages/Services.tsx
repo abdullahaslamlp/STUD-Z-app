@@ -19,7 +19,7 @@ const features = [
   {
     icon: Brain,
     title: "Brain-Dump Chat",
-    desc: "A personalized AI tutor trained only on YOUR specific class notes. Ask it anything — it's like having a study buddy who actually paid attention.",
+    desc: "A personalized AI tutor trained only on YOUR specific class notes. Ask it anything — it's like having a study bestie who actually paid attention 💀",
     color: "bg-accent",
   },
   {
