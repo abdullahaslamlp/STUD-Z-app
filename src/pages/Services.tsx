@@ -25,7 +25,7 @@ const features = [
   {
     icon: Clock,
     title: "Cram Mode",
-    desc: "Finals tomorrow? Cram Mode condenses your entire semester's notes into bite-sized summaries prioritized by exam relevance.",
+    desc: "Finals tomorrow? Cram Mode condenses your entire semester's notes into bite-sized summaries prioritized by exam relevance. Clutch asf 🫡",
     color: "bg-primary",
     inProgress: true,
   },
