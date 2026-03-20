@@ -52,7 +52,7 @@ export default function About() {
         </div>
 
         <p className="text-muted-foreground max-w-xl mx-auto text-lg text-center mb-12">
-          Stud-Z is a personal project built to make studying smarter, not harder.
+          Built different. Built for us. No cap. 🔥
         </p>
 
         {/* Project info */}
