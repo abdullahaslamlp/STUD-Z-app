@@ -26,9 +26,9 @@ export default function Dashboard() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-display font-bold text-foreground">
-              Hey, <span className="text-primary">{displayName}</span> 👋
+              Yo, <span className="text-primary">{displayName}</span> 👋
             </h1>
-            <p className="text-muted-foreground text-sm mt-1">Ready to crush today's study goals?</p>
+            <p className="text-muted-foreground text-sm mt-1">Let's lock in and crush today's goals fr fr 💪</p>
           </div>
           <Button variant="blocky-outline" size="sm" onClick={signOut}>
             <LogOut size={16} className="mr-1" /> Sign Out
