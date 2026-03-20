@@ -13,7 +13,7 @@ const features = [
   {
     icon: BookOpen,
     title: "Flashcard Forge",
-    desc: "One-click conversion from your notes to active recall flashcard sets. Spaced repetition built in. Your brain will thank you.",
+    desc: "One-click conversion from your notes to active recall flashcard sets. Spaced repetition built in. Your brain will lowkey thank you 🧠",
     color: "bg-secondary",
   },
   {
