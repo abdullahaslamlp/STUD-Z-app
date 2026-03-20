@@ -1,5 +1,5 @@
 import GlassCard from "@/components/GlassCard";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, Linkedin, Github } from "lucide-react";
 import abdullahImg from "@/assets/abdullah.jpeg";
 
 const founders = [
