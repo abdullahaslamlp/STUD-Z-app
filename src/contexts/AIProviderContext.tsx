@@ -1,19 +1,30 @@
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-// Gemini is the only provider now
-export type AIProvider = "gemini";
+export type AIProvider = "lovable" | "gemini";
 
 interface AIProviderContextType {
   aiProvider: AIProvider;
+  setAIProvider: (p: AIProvider) => void;
 }
 
 const AIProviderContext = createContext<AIProviderContextType>({
-  aiProvider: "gemini",
+  aiProvider: "lovable",
+  setAIProvider: () => {},
 });
 
 export function AIProviderProvider({ children }: { children: ReactNode }) {
+  const [aiProvider, setAIProviderState] = useState<AIProvider>(() => {
+    const stored = localStorage.getItem("stud-z-ai-provider");
+    return stored === "gemini" ? "gemini" : "lovable";
+  });
+
+  const setAIProvider = (p: AIProvider) => {
+    setAIProviderState(p);
+    localStorage.setItem("stud-z-ai-provider", p);
+  };
+
   return (
-    <AIProviderContext.Provider value={{ aiProvider: "gemini" }}>
+    <AIProviderContext.Provider value={{ aiProvider, setAIProvider }}>
       {children}
     </AIProviderContext.Provider>
   );
