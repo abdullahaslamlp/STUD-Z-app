@@ -2,8 +2,26 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const SUPABASE_URL = String(import.meta.env.VITE_SUPABASE_URL ?? "").trim();
+const SUPABASE_PUBLISHABLE_KEY = String(
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? ""
+).trim();
+
+if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+  const root = document.getElementById("root");
+  if (root) {
+    root.innerHTML = `
+      <div style="font-family:system-ui,sans-serif;max-width:36rem;margin:3rem auto;padding:0 1.5rem;line-height:1.5;color:#111">
+        <h1 style="font-size:1.25rem;margin-bottom:0.75rem">Configuration missing</h1>
+        <p>This app needs <code style="background:#f4f4f5;padding:0.1em 0.35em;border-radius:4px">VITE_SUPABASE_URL</code> and <code style="background:#f4f4f5;padding:0.1em 0.35em;border-radius:4px">VITE_SUPABASE_PUBLISHABLE_KEY</code> at build time.</p>
+        <p><strong>On Lovable:</strong> open your project → Secrets / Environment variables, add both variables (from the Supabase dashboard: Project Settings → API), then publish again.</p>
+        <p><strong>Local dev:</strong> copy <code style="background:#f4f4f5;padding:0.1em 0.35em;border-radius:4px">.env.example</code> to <code style="background:#f4f4f5;padding:0.1em 0.35em;border-radius:4px">.env</code> and fill in the values.</p>
+      </div>`;
+  }
+  throw new Error(
+    "Missing VITE_SUPABASE_URL or VITE_SUPABASE_PUBLISHABLE_KEY (required for Supabase client)."
+  );
+}
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
