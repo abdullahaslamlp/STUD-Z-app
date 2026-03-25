@@ -2,9 +2,16 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = String(import.meta.env.VITE_SUPABASE_URL ?? "").trim();
+// If Lovable doesn't provide VITE_* at build time, fall back to the defaults in
+// `.env.production` committed to the repo.
+// Note: anon/public keys are safe to ship; RLS protects private data.
+const FALLBACK_SUPABASE_URL = "https://iqmkkrktebfysykrdqig.supabase.co";
+const FALLBACK_SUPABASE_PUBLISHABLE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlxbWtrcmt0ZWJmeXN5a3JkcWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0MjYyNTcsImV4cCI6MjA4OTAwMjI1N30._iwoh61vcl-iynumk4dWVaQJYlLVRjOJPDGbbWsA2YY";
+
+const SUPABASE_URL = String(import.meta.env.VITE_SUPABASE_URL ?? FALLBACK_SUPABASE_URL).trim();
 const SUPABASE_PUBLISHABLE_KEY = String(
-  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? ""
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? FALLBACK_SUPABASE_PUBLISHABLE_KEY
 ).trim();
 
 if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
