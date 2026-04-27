@@ -9,7 +9,7 @@ import TasksPanel from "@/components/dashboard/TasksPanel";
 import NotesPanel from "@/components/dashboard/NotesPanel";
 import AIAssistantPanel from "@/components/dashboard/AIAssistantPanel";
 import MaterialUploadPanel from "@/components/dashboard/MaterialUploadPanel";
-import { BookOpen, Brain, Zap, LogOut } from "lucide-react";
+import { BookOpen, Brain, Zap, LogOut, Calendar } from "lucide-react";
 
 export default function Dashboard() {
   const { user, signOut } = useAuth();
@@ -41,6 +41,7 @@ export default function Dashboard() {
             { icon: BookOpen, label: "Study Notes", value: String(notes.length), color: "text-primary" },
             { icon: Brain, label: "Flashcards", value: "Quiz →", color: "text-secondary", link: "/flashcards" },
             { icon: Zap, label: "Tasks Due", value: String(pendingTasks), color: "text-accent" },
+            { icon: Calendar, label: "Timetable", value: "Open →", color: "text-primary", link: "/timetable" },
           ].map((stat) => {
             const inner = (
               <GlassCard key={stat.label} blocky className="flex items-center gap-4">
