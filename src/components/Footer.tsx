@@ -8,8 +8,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <img src={logo} alt="Stud-Z" className="h-8 w-8 rounded-sm pixel-border-sm" />
-              <span className="font-display text-lg font-bold text-primary">Stud-Z</span>
+              <img src={logo} alt="Stud-Z" className="h-8 w-8 object-contain" />
+              <span className="font-display text-lg font-bold text-gradient-logo">Stud-Z</span>
             </div>
             <p className="text-sm text-muted-foreground">Study Smarter, Not Harder.</p>
           </div>
