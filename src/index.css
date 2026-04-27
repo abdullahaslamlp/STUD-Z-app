@@ -38,6 +38,10 @@
 
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'DM Sans', sans-serif;
+    --brand-logo-start: 269 72% 50%;
+    --brand-logo-mid: 326 70% 53%;
+    --brand-logo-end: 25 95% 55%;
+    --gradient-logo: linear-gradient(135deg, hsl(var(--brand-logo-start)), hsl(var(--brand-logo-mid)) 48%, hsl(var(--brand-logo-end)));
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 220 20% 14%;
@@ -107,6 +111,13 @@
 @layer utilities {
   .text-gradient-brand {
     background: linear-gradient(135deg, hsl(210 100% 50%), hsl(25 95% 55%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-logo {
+    background: var(--gradient-logo);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
