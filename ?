@@ -1,0 +1,72 @@
+src/pages/TechStack.tsx:53:                  <s.icon size={24} className="text-primary-foreground" />
+src/pages/Auth.tsx:10:import logo from "@/assets/stud-z-logo.png";
+src/pages/Auth.tsx:80:          <img src={logo} alt="Stud-Z" className="h-16 w-16 mx-auto rounded-xl pixel-border-sm" />
+src/pages/Auth.tsx:82:            {isLogin ? "Welcome Back" : "Join Stud-Z"}
+src/pages/Auth.tsx:180:              className="text-xs text-primary hover:underline"
+src/pages/Auth.tsx:196:            className="text-primary font-semibold hover:underline"
+src/pages/Services.tsx:52:            Our <span className="text-primary">Features</span>
+src/pages/Services.tsx:63:                <f.icon size={24} className="text-primary-foreground" />
+src/pages/Flashcards.tsx:73:            <Brain className="text-primary" size={32} /> Flashcards & Testing
+src/pages/Flashcards.tsx:158:                <p className="text-3xl font-bold text-primary">
+src/pages/Dashboard.tsx:29:              Yo, <span className="text-primary">{displayName}</span> 👋
+src/pages/Dashboard.tsx:41:            { icon: BookOpen, label: "Study Notes", value: String(notes.length), color: "text-primary" },
+src/pages/About.tsx:8:    role: "Creator of Stud-Z",
+src/pages/About.tsx:22:            Meet the <span className="text-primary">Creator</span>
+src/pages/About.tsx:39:                <p className="text-sm text-primary font-medium">{f.role}</p>
+src/pages/About.tsx:43:                <a href="https://www.linkedin.com/in/abdullahaslamlp/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+src/pages/About.tsx:46:                <a href="https://github.com/abdullahaslamlp" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+src/pages/NotFound.tsx:16:        <a href="/" className="text-primary underline hover:text-primary/90">
+src/pages/Index.tsx:7:import logo from "@/assets/stud-z-logo.png";
+src/pages/Index.tsx:28:    text: "Stud-Z literally saved my CGPA last semester. I recorded every lecture and the AI summaries were better than my own notes. 10/10 recommend!",
+src/pages/Index.tsx:58:    text: "I was skeptical at first, but after using Stud-Z for one week I couldn't go back. The transcription quality is surprisingly good even with my professor's accent.",
+src/pages/Index.tsx:75:            <img src={logo} alt="Stud-Z" className="h-20 w-20 mx-auto rounded-xl pixel-border" />
+src/pages/Index.tsx:78:              <span className="text-primary">Not Harder</span>
+src/pages/Index.tsx:103:            Why <span className="text-primary">Stud-Z</span> Hits Different
+src/pages/Index.tsx:125:              <h3 className="font-display text-xl font-semibold text-primary flex items-center gap-2">
+src/pages/Index.tsx:126:                <Zap size={20} /> The Stud-Z Way (slay)
+src/pages/Index.tsx:156:                  <f.icon size={24} className="text-primary-foreground" />
+src/pages/Index.tsx:181:            What the <span className="text-primary">Gang</span> Says 🗣️
+src/pages/Index.tsx:190:                <Quote size={24} className="text-primary/40" />
+src/pages/ResetPassword.tsx:9:import logo from "@/assets/stud-z-logo.png";
+src/pages/ResetPassword.tsx:47:          <img src={logo} alt="Stud-Z" className="h-16 w-16 mx-auto rounded-xl pixel-border-sm" />
+src/pages/Contact.tsx:23:            Get in <span className="text-primary">Touch</span>
+src/pages/ForgotPassword.tsx:9:import logo from "@/assets/stud-z-logo.png";
+src/pages/ForgotPassword.tsx:37:          <img src={logo} alt="Stud-Z" className="h-16 w-16 mx-auto rounded-xl pixel-border-sm" />
+src/pages/ForgotPassword.tsx:67:        <Link to="/auth" className="flex items-center justify-center gap-1 text-sm text-primary hover:underline">
+src/components/ui/radio-group.tsx:23:        "aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+src/components/StudyBuddy.tsx:51:        className="w-14 h-14 bg-primary text-primary-foreground border-2 border-border flex items-center justify-center text-2xl pixel-border-sm shrink-0 hover:scale-105 transition-transform"
+src/components/ui/sonner.tsx:18:          actionButton: "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+src/components/Navbar.tsx:7:import logo from "@/assets/stud-z-logo.png";
+src/components/Navbar.tsx:33:          <img src={logo} alt="Stud-Z Logo" className="h-10 w-10 rounded-lg pixel-border-sm" />
+src/components/Navbar.tsx:34:          <span className="font-display text-xl font-bold text-primary">Stud-Z</span>
+src/components/Navbar.tsx:43:              className={`text-sm font-semibold transition-colors hover:text-primary ${
+src/components/Navbar.tsx:44:                location.pathname === l.path ? "text-primary" : "text-muted-foreground"
+src/components/Navbar.tsx:52:            className="p-2 rounded-none border-2 border-border hover:border-primary transition-colors text-foreground hover:text-primary"
+src/components/Navbar.tsx:100:              className={`block py-3 text-sm font-semibold transition-colors hover:text-primary ${
+src/components/Navbar.tsx:101:                location.pathname === l.path ? "text-primary" : "text-muted-foreground"
+src/components/Footer.tsx:2:import logo from "@/assets/stud-z-logo.png";
+src/components/Footer.tsx:11:              <img src={logo} alt="Stud-Z" className="h-8 w-8 rounded-sm pixel-border-sm" />
+src/components/Footer.tsx:12:              <span className="font-display text-lg font-bold text-primary">Stud-Z</span>
+src/components/Footer.tsx:21:                <Link key={i.p} to={i.p} className="block text-sm text-muted-foreground hover:text-primary transition-colors">{i.l}</Link>
+src/components/Footer.tsx:29:              <a href="https://www.linkedin.com/in/abdullahaslamlp/" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">LinkedIn</a>
+src/components/Footer.tsx:30:              <a href="https://github.com/abdullahaslamlp" target="_blank" rel="noopener noreferrer" className="block hover:text-primary transition-colors">GitHub</a>
+src/components/Footer.tsx:37:              <a href="#" className="block hover:text-primary transition-colors">Privacy Policy</a>
+src/components/Footer.tsx:38:              <a href="#" className="block hover:text-primary transition-colors">Terms of Service</a>
+src/components/Footer.tsx:44:          © 2026 Stud-Z. All rights reserved.
+src/components/ui/button.tsx:12:        default: "bg-primary text-primary-foreground hover:bg-primary/90 rounded-md",
+src/components/ui/button.tsx:17:        link: "text-primary underline-offset-4 hover:underline",
+src/components/ui/button.tsx:18:        blocky: "bg-primary text-primary-foreground hover:bg-primary/90 pixel-border-sm rounded-none font-display tracking-wide",
+src/components/dashboard/TasksPanel.tsx:118:              <button onClick={() => toggleStatus(task)} className="text-muted-foreground hover:text-primary">
+src/components/ui/badge.tsx:11:        default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+src/components/dashboard/MaterialUploadPanel.tsx:12:  uploading: { label: "Uploading…", icon: Loader2, color: "text-primary", progress: 30 },
+src/components/dashboard/MaterialUploadPanel.tsx:13:  processing: { label: "Extracting notes with AI…", icon: Loader2, color: "text-primary", progress: 70 },
+src/components/dashboard/MaterialUploadPanel.tsx:52:          <FileText size={20} className="text-primary" /> Upload Study Material
+src/components/dashboard/NotesPanel.tsx:60:          <BookOpen size={20} className="text-primary" /> Study Notes
+src/components/dashboard/NotesPanel.tsx:106:                  <button onClick={() => startEdit(note)} className="text-muted-foreground hover:text-primary">
+src/components/ui/calendar.tsx:35:          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+src/components/ui/checkbox.tsx:14:      "peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+src/components/dashboard/ProfileCard.tsx:45:          <User size={20} className="text-primary" />
+src/components/dashboard/AIAssistantPanel.tsx:56:        Ask Stud-Z to turn your tasks and notes into a focused study plan, summaries, or revision strategy.
+src/components/dashboard/AIAssistantPanel.tsx:106:                {message.role === "user" ? "You" : "Stud-Z"}
+src/components/dashboard/AIAssistantPanel.tsx:113:          <p className="text-muted-foreground text-xs italic">Stud-Z is thinking…</p>
+src/components/dashboard/AIAssistantPanel.tsx:132:            {ask.isPending ? "Generating..." : "Ask Stud-Z"}
