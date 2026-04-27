@@ -72,10 +72,10 @@ export default function Index() {
 
         <div className="container mx-auto px-4 relative z-10 pt-24">
           <div className="max-w-3xl mx-auto text-center space-y-6 animate-slide-up">
-            <img src={logo} alt="Stud-Z" className="h-20 w-20 mx-auto rounded-xl pixel-border" />
+            <img src={logo} alt="Stud-Z" className="h-24 w-24 mx-auto object-contain" />
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold leading-tight text-foreground">
               Study Smarter,{" "}
-              <span className="text-primary">Not Harder</span>
+              <span className="text-gradient-logo">Not Harder</span>
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               The AI-powered study bestie that turns your lecture chaos into organized genius. Built by students, for students. No cap 🔥
@@ -100,7 +100,7 @@ export default function Index() {
       <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-center mb-4 text-foreground">
-            Why <span className="text-primary">Stud-Z</span> Hits Different
+            Why <span className="text-gradient-logo">Stud-Z</span> Hits Different
           </h2>
           <p className="text-center text-muted-foreground mb-16 max-w-xl mx-auto">
             Traditional studying is giving 💀. Here's how we fix it.

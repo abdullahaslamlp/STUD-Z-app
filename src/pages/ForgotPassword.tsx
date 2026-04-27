@@ -34,7 +34,7 @@ export default function ForgotPassword() {
     <div className="min-h-screen flex items-center justify-center bg-background px-4 pt-20">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
-          <img src={logo} alt="Stud-Z" className="h-16 w-16 mx-auto rounded-xl pixel-border-sm" />
+          <img src={logo} alt="Stud-Z" className="h-16 w-16 mx-auto object-contain" />
           <h1 className="text-3xl font-display font-bold text-foreground">Reset Password</h1>
           <p className="text-muted-foreground text-sm">
             {sent ? "Check your email for a reset link." : "Enter your email and we'll send you a reset link."}

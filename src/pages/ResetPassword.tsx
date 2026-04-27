@@ -44,7 +44,7 @@ export default function ResetPassword() {
     <div className="min-h-screen flex items-center justify-center bg-background px-4 pt-20">
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
-          <img src={logo} alt="Stud-Z" className="h-16 w-16 mx-auto rounded-xl pixel-border-sm" />
+          <img src={logo} alt="Stud-Z" className="h-16 w-16 mx-auto object-contain" />
           <h1 className="text-3xl font-display font-bold text-foreground">New Password</h1>
           <p className="text-muted-foreground text-sm">Enter your new password below.</p>
         </div>
