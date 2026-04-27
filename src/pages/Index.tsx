@@ -6,6 +6,7 @@ import { Zap, BookOpen, Brain, X, Check, Star, Quote } from "lucide-react";
 import heroImg from "@/assets/hero-students.jpg";
 import logo from "@/assets/stud-z-logo.png";
 import StudyBuddy from "@/components/StudyBuddy";
+import SEO from "@/components/SEO";
 
 const oldWay = [
   "Typing notes while missing half the lecture 😴",
@@ -63,6 +64,11 @@ const testimonials = [
 export default function Index() {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Stud-Z (StudZ) — AI Study Companion for Gen Z | Study Smarter, Not Harder"
+        description="Stud-Z (also known as StudZ or studz) is the AI-powered study app for Gen Z. Lecture transcription, auto flashcards, and a personal AI tutor — all in one place."
+        path="/"
+      />
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0">

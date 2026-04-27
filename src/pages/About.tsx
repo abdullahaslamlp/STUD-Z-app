@@ -1,6 +1,7 @@
 import GlassCard from "@/components/GlassCard";
 import { TrendingUp, Linkedin, Github } from "lucide-react";
 import abdullahImg from "@/assets/abdullah.jpeg";
+import SEO from "@/components/SEO";
 
 const founders = [
   {
@@ -16,6 +17,11 @@ const founders = [
 export default function About() {
   return (
     <div className="min-h-screen pt-24 pb-16 bg-background">
+      <SEO
+        title="About Stud-Z (StudZ) — Built by Abdullah Aslam"
+        description="Meet the creator of Stud-Z (StudZ), an AI-powered study companion for Gen Z students. Built solo by Abdullah Aslam."
+        path="/about"
+      />
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-slide-up">
           <h1 className="text-4xl sm:text-5xl font-display font-bold mb-4 text-foreground">
